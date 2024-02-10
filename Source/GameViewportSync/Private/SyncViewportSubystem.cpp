@@ -173,7 +173,7 @@ TSharedRef<SWidget> USyncViewportSubsystem::FLiveViewportInfo::GetOverlayWidget(
 		[
 			SNew(STextBlock)
 			.Text(LOCTEXT("SyncingViewportLablel", "Syncing Viewport"))
-			.Font(FEditorStyle::GetFontStyle(TEXT("MenuItem.Font")))
+			.Font(FAppStyle::GetFontStyle(TEXT("MenuItem.Font")))
 			.ColorAndOpacity(FLinearColor(0.4f, 1.0f, 1.0f))
 			.ShadowOffset(FVector2D(1, 1))
 		]
@@ -198,7 +198,7 @@ TSharedRef<SWidget> USyncViewportSubsystem::FLiveViewportInfo::GetOverlayWidget(
 			[
 				SNew(STextBlock)
 				.Text(LOCTEXT("FollowingActor", "Following Actor:"))
-				.Font(FEditorStyle::GetFontStyle(TEXT("MenuItem.Font")))
+				.Font(FAppStyle::GetFontStyle(TEXT("MenuItem.Font")))
 				.ShadowOffset(FVector2D(1, 1))
 			]
 			+ SHorizontalBox::Slot()
@@ -232,7 +232,7 @@ TSharedRef<SWidget> USyncViewportSubsystem::FLiveViewportInfo::GetOverlayWidget(
 							, FText::FromString(FollowActorName)
 					);
 				})
-				.Font(FEditorStyle::GetFontStyle(TEXT("MenuItem.Font")))
+				.Font(FAppStyle::GetFontStyle(TEXT("MenuItem.Font")))
 						.ColorAndOpacity(FLinearColor(0.4f, 1.0f, 1.0f))
 						.ShadowOffset(FVector2D(1, 1))
 			]
@@ -395,20 +395,28 @@ void USyncViewportSubsystem::ApplyViewportSync(FLevelEditorViewportClient* const
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
 	ViewportClient->SetRealtime(true, true);
 #else
-	ViewportClient->SetRealtimeOverride(true, LOCTEXT("ViewportSync", "Viewport Sync"));
+	ViewportClient->AddRealtimeOverride(true, LOCTEXT("ViewportSync", "Viewport Sync"));
 #endif
 }
 
 void USyncViewportSubsystem::RevertViewportSync(FLevelEditorViewportClient* const ViewportClient)
 {
 	ViewportClient->SetReferenceToWorldContext(GEditor->GetEditorWorldContext());
-
 #if ENGINE_MAJOR_VERSION <= 4 && ENGINE_MINOR_VERSION <= 24
 	ViewportClient->RestoreRealtime(true);
 #else
-	ViewportClient->RemoveRealtimeOverride();
+	if (ViewportClient->HasRealtimeOverride(LOCTEXT("ViewportSync", "Viewport Sync")))
+	{
+		ViewportClient->RemoveRealtimeOverride(LOCTEXT("ViewportSync", "Viewport Sync"), true);
+	}
+	else
+	{
+		ViewportClient->RemoveRealtimeOverride();
+	}
 #endif
 }
+
+
 
 //////////////////////////////////////////////
 // Follow

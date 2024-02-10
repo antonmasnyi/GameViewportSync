@@ -11,7 +11,7 @@ FViewportSyncEditorCommands::FViewportSyncEditorCommands() : TCommands<FViewport
 	"ViewportSyncEditorCommands",
 	NSLOCTEXT("Contexts", "ViewportSyncEditorCommands", "Viewport Sync"),
 	NAME_None, 
-	FEditorStyle::GetStyleSetName())
+	FAppStyle::GetAppStyleSetName())
 {}
 
 void FViewportSyncEditorCommands::RegisterCommands()

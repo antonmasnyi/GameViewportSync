@@ -268,7 +268,7 @@ void FViewportSyncEditorExtender::BuildCurrentFollowActorWidgetForViewport(FMenu
 					GEditor->SelectActor(FollowedActor.Get(), true, true);
 				})
 				.ForegroundColor(FSlateColor::UseForeground())
-				.ButtonStyle(FEditorStyle::Get(), "NoBorder")
+				.ButtonStyle(FAppStyle::Get(), "NoBorder")
 				.ContentPadding(0.0f)
 				.Text_Lambda(ActorName)
 		]
@@ -292,11 +292,11 @@ void FViewportSyncEditorExtender::BuildCurrentFollowActorWidgetForViewport(FMenu
 				.ForegroundColor(FSlateColor::UseForeground())
 				.HAlign(HAlign_Fill)
 				.ToolTipText(LOCTEXT("ClearFollow", "Remove followed Actor"))
-				.ButtonStyle(FEditorStyle::Get(), "NoBorder")
+				.ButtonStyle(FAppStyle::Get(), "NoBorder")
 				.Content()
 				[			
 					SNew(SImage)
-					.Image(FEditorStyle::GetBrush("PropertyWindow.Button_Clear"))
+					.Image(FAppStyle::GetBrush("PropertyWindow.Button_Clear"))
 				]
 
 		],
