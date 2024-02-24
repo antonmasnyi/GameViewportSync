@@ -173,7 +173,7 @@ TSharedRef<SWidget> USyncViewportSubsystem::FLiveViewportInfo::GetOverlayWidget(
 		[
 			SNew(STextBlock)
 			.Text(LOCTEXT("SyncingViewportLablel", "Syncing Viewport"))
-			.Font(FEditorStyle::GetFontStyle(TEXT("MenuItem.Font")))
+			.Font(FAppStyle::GetFontStyle(TEXT("MenuItem.Font")))
 			.ColorAndOpacity(FLinearColor(0.4f, 1.0f, 1.0f))
 			.ShadowOffset(FVector2D(1, 1))
 		]
@@ -198,7 +198,7 @@ TSharedRef<SWidget> USyncViewportSubsystem::FLiveViewportInfo::GetOverlayWidget(
 			[
 				SNew(STextBlock)
 				.Text(LOCTEXT("FollowingActor", "Following Actor:"))
-				.Font(FEditorStyle::GetFontStyle(TEXT("MenuItem.Font")))
+				.Font(FAppStyle::GetFontStyle(TEXT("MenuItem.Font")))
 				.ShadowOffset(FVector2D(1, 1))
 			]
 			+ SHorizontalBox::Slot()
@@ -232,7 +232,7 @@ TSharedRef<SWidget> USyncViewportSubsystem::FLiveViewportInfo::GetOverlayWidget(
 							, FText::FromString(FollowActorName)
 					);
 				})
-				.Font(FEditorStyle::GetFontStyle(TEXT("MenuItem.Font")))
+				.Font(FAppStyle::GetFontStyle(TEXT("MenuItem.Font")))
 						.ColorAndOpacity(FLinearColor(0.4f, 1.0f, 1.0f))
 						.ShadowOffset(FVector2D(1, 1))
 			]
